@@ -47,6 +47,8 @@
 
 #include "./isThereRoute.cpp"
 #include "./minimalTree.cpp"
+#include "./depthLists.cpp"
+
 
 int main () {
     
@@ -587,12 +589,50 @@ int main () {
     }
 
     // minimal tree
-    if (1) {
+    if (0) {
         std::vector<int> my_vector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
         
         MTNode * tree_node = minimalTree(my_vector);
         inOrderMTSweep(tree_node);
+    }
+            
+    // depth lists
+    if (1) {
+        // depth 3
+        DLNode* child7 = new DLNode(7);
+        DLNode* child8 = new DLNode(8);
+        DLNode* child9 = new DLNode(9);
+        DLNode* child10 = new DLNode(10);
+        DLNode* child11 = new DLNode(11);
+        DLNode* child12 = new DLNode(12);
+        DLNode* child13 = new DLNode(13);
+        DLNode* child14 = new DLNode(14);
+        
+        // depth 2
+        DLNode* child5 = new DLNode(5, child11, child12);
+        DLNode* child6 = new DLNode(6, child13, child14);
+        DLNode* child3 = new DLNode(3, child7, child8);
+        DLNode* child4 = new DLNode(4, child9, child10);
+        // depth 1
+        DLNode* child1 = new DLNode(1, child3, child4);
+        DLNode* child2 = new DLNode(2, child5, child6);
+        // depth 0
+        DLNode* root = new DLNode(0, child1, child2);
+        
+        std::vector<std::list<DLNode*>> my_depth_vector = depthListGenerator(root);
+        int index = 0;
+        for (std::list<DLNode*> i : my_depth_vector) {
+            std::cout << "beginning of depth list #" << index << std::endl;
+            std::list<DLNode*>::iterator it = i.begin();
+            while (it != i.end()) {
+                std::cout << (*it)->value_ << " - ";
+                it++;
+            }
+            std::cout << std::endl;
+            index++;
+        }
+
     }
 
 }
