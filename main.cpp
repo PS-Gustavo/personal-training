@@ -32,7 +32,7 @@
 #include "./binaryTree.cpp"
 #include "./binarySearchTree.cpp"
 #include "./minHeap.cpp"
-#include "./graphList.cpp"
+//#include "./graphList.cpp"
 
 // exercises
 #include "./isUniqueString.cpp"
@@ -44,6 +44,9 @@
 #include "./removeMiddleElement.cpp"
 #include "./partitionList.cpp"
 #include "./listSum.cpp"
+
+#include "./isThereRoute.cpp"
+#include "./minimalTree.cpp"
 
 int main () {
     
@@ -547,7 +550,8 @@ int main () {
     }
 
     // graph experiment
-    if (1) {
+    // isThereRoute exercise
+    if (0) {
         std::vector<Node *> node_list;
         Node *node5 = new Node(5);
         Node *node4 = new Node(4);
@@ -562,12 +566,34 @@ int main () {
         node_list.push_back(node4);
         node_list.push_back(node5);
 
+        Node *node6 = new Node(6, {node0});
+        node_list.push_back(node6);
+
         Graph * my_graph = new Graph(node_list);
         std::cout << "DFS trail" << std::endl;
         depthFirstSearch(my_graph, my_graph->node_list_[0]);
         my_graph->clearVisitedArray();
         std::cout << "BFS trail" << std::endl;
         breadthFirstSearch(my_graph, my_graph->node_list_[0]);
+        my_graph->clearVisitedArray();
+        std::cout << "is there a path from " << node0->value_ << " to " << node5->value_ << "? " << isThereRoute(my_graph, node0, node5) << std::endl;
+        DfsCleanup(my_graph, my_graph->node_list_[0]);
+        std::cout << "is there a path from " << node0->value_ << " to " << node6->value_ << "? " << isThereRoute(my_graph, node0, node6) << std::endl;
+        DfsCleanup(my_graph, my_graph->node_list_[0]);
+        std::cout << "is there a path from " << node2->value_ << " to " << node4->value_ << "? " << isThereRoute(my_graph, node2, node4) << std::endl;
+        DfsCleanup(my_graph, my_graph->node_list_[0]);
+        std::cout << "is there a path from " << node2->value_ << " to " << node1->value_ << "? " << isThereRoute(my_graph, node2, node1) << std::endl;
+        DfsCleanup(my_graph, my_graph->node_list_[0]);
     }
+
+    // minimal tree
+    if (1) {
+        std::vector<int> my_vector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+        
+        MTNode * tree_node = minimalTree(my_vector);
+        inOrderMTSweep(tree_node);
+    }
+
 }
 

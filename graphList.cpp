@@ -6,15 +6,18 @@ class Node {
     public:
     int value_;
     int associated_index_;
+    bool is_visited_;
     std::vector<Node*> node_connections_;
 
     Node(int value) {
         this->value_ = value;
+        this->is_visited_ = false;
     }
 
     Node (int value, std::vector<Node *> node_connections_list) {
         this->value_ = value;
         this->node_connections_ = node_connections_list;
+        this->is_visited_ = false;
     }
 
     void connectNode(Node * node_connection) {
@@ -64,6 +67,16 @@ class Graph {
         std::cout << initialNode->value_ << std::endl;
         for (Node * i : initialNode->node_connections_) {
             depthFirstSearch(graph, i);
+        }
+    }
+
+    void DfsCleanup(Graph * graph, Node * initialNode) {
+        graph->clearVisitedArray();
+        if (graph->visited_list_[initialNode->associated_index_]) return;
+        graph->visited_list_[initialNode->associated_index_] = true;
+        initialNode->is_visited_ = false;
+        for (Node * i : initialNode->node_connections_) {
+            DfsCleanup(graph, i);
         }
     }
 
