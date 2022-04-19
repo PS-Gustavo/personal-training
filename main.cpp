@@ -48,7 +48,9 @@
 #include "./isThereRoute.cpp"
 #include "./minimalTree.cpp"
 #include "./depthLists.cpp"
+#include "./isBalanced.cc"
 
+#include "./tripleStep.cc"
 
 int main () {
     
@@ -371,7 +373,7 @@ int main () {
     }
 
     // returnKthToLast
-    if(0) {
+    if (0) {
         std::forward_list<int> myList;
         myList.push_front(1);
         myList.push_front(2);
@@ -391,7 +393,7 @@ int main () {
     }
 
     // removeMiddleElement
-    if(0) {
+    if (0) {
         std::forward_list<int> myList;
         myList.push_front(1);
         myList.push_front(2);
@@ -598,7 +600,7 @@ int main () {
     }
             
     // depth lists
-    if (1) {
+    if (0) {
         // depth 3
         DLNode* child7 = new DLNode(7);
         DLNode* child8 = new DLNode(8);
@@ -635,5 +637,56 @@ int main () {
 
     }
 
-}
+    // isBalanced exercise
+    if (0) {
+        // depth 3
+        IBNode* child7 = new IBNode(7);
+        IBNode* child8 = new IBNode(8);
+        IBNode* child9 = new IBNode(9);
+        IBNode* child10 = new IBNode(10);
+        IBNode* child11 = new IBNode(11);
+        IBNode* child12 = new IBNode(12);
+        IBNode* child13 = new IBNode(13);
+        IBNode* child14 = new IBNode(14);
+        
+        // depth 2
+        IBNode* child5 = new IBNode(5, child11, child12);
+        IBNode* child6 = new IBNode(6, child13, child14);
+        IBNode* child3 = new IBNode(3, child7, child8);
+        IBNode* child4 = new IBNode(4, child9, child10);
+        // depth 1
+        IBNode* child1 = new IBNode(1, child3, child4);
+        IBNode* child2 = new IBNode(2, child5, child6);
+        // depth 0
+        IBNode* root = new IBNode(0, child1, child2);
 
+        std::cout << "Is IB Tree balanced? " << isTreeBalanced(root) << std::endl;
+
+        // depth 3
+        IBNode* b_child7 = new IBNode(7);
+        
+        // depth 2
+        IBNode* b_child6 = new IBNode(6);
+        IBNode* b_child3 = new IBNode(3, b_child7, nullptr);
+        IBNode* b_child4 = new IBNode(4);
+        // depth 1
+        IBNode* b_child1 = new IBNode(1, b_child3, b_child4);
+        IBNode* b_child2 = new IBNode(2, nullptr, b_child6);
+        // depth 0
+        IBNode* b_root = new IBNode(0, b_child1, b_child2);
+        std::cout << "Is b_IB Tree balanced? " << isTreeBalanced(b_root) << std::endl;
+    }
+
+    // triple step exercise
+    if (1) {
+        int n = 1;
+        std::cout << tripleStep(n) << std::endl;
+        int n2 = 2;
+        std::cout << tripleStep(n2) << std::endl;
+        int n3 = 3;
+        std::cout << tripleStep(n3) << std::endl;
+        int n4 = 1000;
+        std::cout << tripleStep(n4) << std::endl;
+    }
+
+}
